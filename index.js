@@ -211,6 +211,33 @@ var blockhashData = function(imgData, bits, method) {
     return hash;
 };
 
+var blockhashBuf = function(buf, contentType, bits, method) {
+    data = new Uint8Array(buf);
+    if (contentType === 'image/png') {
+        png = new PNG(data);
+
+        imgData = {
+            width: png.width,
+            height: png.height,
+            data: new Uint8Array(png.width * png.height * 4)
+        };
+
+        png.copyToImageData(imgData, png.decodePixels());
+    }
+    else if (contentType === 'image/jpeg') {
+        imgData = jpeg.decode(data);
+    }
+
+    if (!imgData) {
+        throw new Error("Couldn't decode image");
+    }
+
+    // TODO: resize if required
+
+    hash = blockhashData(imgData, bits, method);
+    return hash
+}
+
 var blockhash = function(src, bits, method, callback) {
     var xhr;
 
@@ -263,6 +290,7 @@ var blockhash = function(src, bits, method, callback) {
 module.exports = {
   hammingDistance: hammingDistance,
   blockhash: blockhash,
+  blockhashBuf: blockhashBuf,
   blockhashData: blockhashData
 };
 
