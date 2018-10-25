@@ -1,6 +1,6 @@
 {
   "name": "blockhash",
-  "version": "0.3",
+  "version": "0.0.4",
   "homepage": "https://github.com/commonsmachinery/blockhash-js",
   "author": "Commons Machinery <dev@commonsmachinery.se>",
   "description": "Perceptual image hash calculation tool",
@@ -12,17 +12,6 @@
     "test": "mocha"
   },
   "main": "index.js",
-  "browser": {
-    "png-js": "./node_modules/png-js/png.js"
-  },
-  "browserify-shim": {
-    "png-js": "PNG"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
   "keywords": [
     "image",
     "hashing",
@@ -35,7 +24,7 @@
     "jpeg-js": "0.0.4",
     "jshint": "*",
     "mocha": "*",
-    "png-js": "^0.1.1"
+    "pngjs": "3.3.3"
   },
   "license": "MIT"
 }
